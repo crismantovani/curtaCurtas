@@ -30,7 +30,6 @@ export const Home = () => {
      for(let i of films){
       getFilms(i)
     }
-    
-  
+     
   return rootElement;
 };
