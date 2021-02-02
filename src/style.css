@@ -11,3 +11,12 @@
     width: 300px;
     height: 385px;
 }
+.details {
+    display: none;
+}
+#main-page{
+    display: none;
+}
+/* #menu{
+    display: block;
+} */
