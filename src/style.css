@@ -9,12 +9,6 @@ body{
     padding: 0;
     background-color: #D9D2B0;
 }
-.lista-que-vamos-apagar {
-    display: flex;
-    list-style: none;
-    justify-content: space-between;
-}
-
 #catalogue {
     max-width: 100%;
     overflow-x: scroll;
