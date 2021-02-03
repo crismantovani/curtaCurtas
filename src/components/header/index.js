@@ -1,7 +1,5 @@
 
-import {
-  films
-} from '../../pages/home/mock.js'
+import { films } from '../../pages/home/mock.js'
 import { printFilms} from '../../pages/home/index.js'
 
 
