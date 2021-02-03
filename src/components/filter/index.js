@@ -1,5 +1,5 @@
 import { films } from '../../pages/home/mock.js'
-import { printFilms } from '../../pages/home/index.js'
+import { printFilms, getFilms } from '../../pages/home/index.js'
 
 export const createMenuFilter = () => {
   const filterContent = document.createElement('section');
@@ -102,6 +102,17 @@ export const createMenuFilter = () => {
     filterData("imdbRating", filterByImdb.value)
   });
 
+  const filterByGenre = filterContent.querySelector('#genre');
+  filterByGenre.addEventListener('change', () => {
+      document.querySelector('#catalogue').innerHTML = ' ';
+      for (const i of films) {
+        if (filterByGenre.value === i.genre) {
+          getFilms(i);
+        }
+
+      }
+    });
+    
   const filterData = (type, condition) => {
     const getCatalogueSection = document.querySelector('#catalogue');
     for (const i of films) {

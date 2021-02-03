@@ -7,7 +7,7 @@ import { header } from '../../components/header/index.js';
 import { createMenuFilter } from '../../components/filter/index.js';
 import { addFilm } from '../../services/index.js';
 
-const getFilms = (i) => {
+export const getFilms = (i) => {
   fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
     .then((response) => response.json())
     .then((json) => {
@@ -167,21 +167,6 @@ function showDetailsContainer(e, json) {
     getDetailsBox.innerHTML = ""
   });
 }
-
-
-export const filterGenre = () => {
-  const filter = document.querySelector('#genre');
-  filter.addEventListener('change', () => {
-    document.querySelector('#catalogue').innerHTML = ' ';
-    // eslint-disable-next-line no-restricted-syntax
-    for (const i of films) {
-      const chooseFilter = filter.value;
-      if (chooseFilter === i.genre) {
-        getFilms(i);
-      }
-    }
-  });
-};
 
 const sortByMostRecent = async () => {
   const dataMovie = [];
