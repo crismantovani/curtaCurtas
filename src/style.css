@@ -295,8 +295,7 @@ button {
 #filters-area {
     background-color: #D9D2B0;
     display: flex;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 50px 5% 0px;
     justify-content: center;
     align-items: center;
 }

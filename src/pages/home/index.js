@@ -22,12 +22,12 @@ export const Home = () => {
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
   <section>
-  <section id="filters-area">
+  <section class="main-page">
+    <section id="header"></section>
+    <section id="filters-area">
     <section id="info"></section>
     <section id="menu"></section>
   </section>
-  <section class="main-page">
-    <section id="header"></section>
     <section id="catalogue" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
