@@ -60,8 +60,9 @@ export const Home = () => {
   const getMenuFilterSection = rootElement.querySelector('#filters-area');
   getMenuFilterSection.appendChild(createMenuFilter());
 
-  const catchCatalogue = rootElement.querySelector('#catalogue');
-  showSerchResult(catchCatalogue);
+ const catchCatalogue = rootElement.querySelector('#catalogue');
+  showSerchResult(catchCatalogue)
+
   return rootElement;
 };
 export const showSerchResult = (section) => {
