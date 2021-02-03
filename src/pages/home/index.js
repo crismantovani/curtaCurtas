@@ -5,8 +5,6 @@ import { films } from './mock.js';
 import { createMenu } from '../../components/menu/index.js';
 import { header } from '../../components/header/index.js';
 import { createMenuFilter } from '../../components/filter/index.js';
-
-
 import { addFilm } from '../../services/index.js';
 
 const getFilms = (i) => {
@@ -91,24 +89,6 @@ export const printFilms = (json) => {
     });
   });
 
-  const likeButton = filmsContainer.querySelector(`#like-${json.imdbID}`);
-  likeButton.addEventListener('click', () => {
-    addFilm(json.imdbID, json.Title, json.Poster, 'likes');
-    alert('Seu like foi recebido');
-  });
-
-  const dislikeButton = filmsContainer.querySelector(`#dislike-${json.imdbID}`);
-  dislikeButton.addEventListener('click', () => {
-    addFilm(json.imdbID, json.Title, json.Poster, 'dislikes');
-    alert('Seu dislike foi recebido');
-  });
-
-  const saveMovieButton = filmsContainer.querySelector(`#save-${json.imdbID}`);
-  saveMovieButton.addEventListener('click', () => {
-    addFilm(json.imdbID, json.Title, json.Poster, 'watchlist');
-    alert('Seu favorito foi recebido');
-
-  });
   return filmsContainer;
 };
 
@@ -163,6 +143,25 @@ function showDetailsContainer(e, json) {
       </section>  
   </section>
   `
+  const likeButton = filmsContainer.querySelector(`#like-${json.imdbID}`);
+  likeButton.addEventListener('click', () => {
+    addFilm(json.imdbID, json.Title, json.Poster, 'likes');
+    alert('Seu like foi recebido');
+  });
+
+  const dislikeButton = filmsContainer.querySelector(`#dislike-${json.imdbID}`);
+  dislikeButton.addEventListener('click', () => {
+    addFilm(json.imdbID, json.Title, json.Poster, 'dislikes');
+    alert('Seu dislike foi recebido');
+  });
+
+  const saveMovieButton = filmsContainer.querySelector(`#save-${json.imdbID}`);
+  saveMovieButton.addEventListener('click', () => {
+    addFilm(json.imdbID, json.Title, json.Poster, 'watchlist');
+    alert('Seu favorito foi recebido');
+
+  });
+  
   const closeDetailsButton = document.getElementById(`close-container-${idNumber}`);
   closeDetailsButton.addEventListener('click', () => {
     getDetailsBox.innerHTML = ""
