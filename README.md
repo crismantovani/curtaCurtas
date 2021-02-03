@@ -7,11 +7,11 @@ Uma aplicação Web para te ajudar a achar os melhores curtas. Para acessar [cli
 ## Índice
 - [1. Desafio](#1-desafio)
 - [2. Introdução](#2-introdução)
-- [3. Processo](#3.processo)
-- [4. Produto](#4.produto)
-- [5. Ferramentas](#5.ferramentas)
-- [6. Créditos](#6.créditos)
-- [7. Autoras](#7.autoras)
+- [3. Processo](#3-processo)
+- [4. Produto](#4-produto)
+- [5. Ferramentas](#5-ferramentas)
+- [6. Créditos](#6-créditos)
+- [7. Autoras](#7-autoras)
 
 ---
 
@@ -106,7 +106,11 @@ Com o redirecionamento do problema e da solução do produto, as funcionalidades
 :iphone: Para acessar nosso protótipo mobile clique [aqui](https://www.figma.com/file/6e75XnGe5FGT27XcxTkMPP/Curta-Curtas-WebApp?node-id=42%3A0).
 :computer: E para acessar nosso protótipo desktop clique [aqui](https://www.figma.com/file/aOQYSDV26XXsg5IkdPzvKF/Curta-Curtas---Desktop?node-id=0%3A1).
 
-:bulb: Canvas
+:bulb: **Canvas**
+
+Para a estrutura do nosso modelo de négocio, e avaliação de nossa aplicação, utilizamos a ferramenta *Business for Canvas*:
+
+![imagem](./src/img/bc.png)
 
 :bulb: **Futuras implementações:**
 &nbsp;
