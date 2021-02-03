@@ -11,7 +11,7 @@ Uma aplicação Web para te ajudar a achar os melhores curtas. Para acessar [cli
 - [4. Produto](#4-produto)
 - [5. Ferramentas](#5-ferramentas)
 - [6. Créditos](#6-créditos)
-- [7. Autoras](#7-desenvolvedoras)
+- [7. Desenvolvedoras](#7-desenvolvedoras)
 
 ---
 
