@@ -2,7 +2,7 @@
 
 ---
 
-Uma aplicação Web para te ajudar a achar os melhores curtas. Para acessar clique aqui! :clapper: 🎬 
+Uma aplicação Web para te ajudar a achar os melhores curtas. Para acessar [clique aqui!](https://curta-curtas.web.app/) :clapper: 🎬 
 
 ## Índice
 - [1. Desafio](#1-desafio)
