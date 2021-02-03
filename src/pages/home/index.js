@@ -1,8 +1,11 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import { films } from './mock.js';
 import { createMenu } from '../../components/menu/index.js';
 import { header } from '../../components/header/index.js';
-import { createMenuFilter } from '../../components/filter/index.js'
+import { createMenuFilter } from '../../components/filter/index.js';
+import { addFilm } from '../../services/index.js';
 
 const getFilms = (i) => {
   fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
@@ -19,7 +22,7 @@ export const Home = () => {
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
   <section>
-    <section id="filters-area">
+  <section id="filters-area">
     <section id="info"></section>
     <section id="menu"></section>
   </section>
@@ -30,9 +33,14 @@ export const Home = () => {
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" databs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
+      </a>
+    </section>
+    <section id="movies-details-info" class="details-box"></section>
+  </section>
+</section>
 `;
 
   const getAllFilms = () => {
@@ -54,185 +62,254 @@ export const Home = () => {
 
  const catchCatalogue = rootElement.querySelector('#catalogue');
   showSerchResult(catchCatalogue)
-   
+
   return rootElement;
 };
-export const showSerchResult =(section) =>{
-  const getCatalogueSection = section
-  return getCatalogueSection
+export const showSerchResult = (section) => {
+  const getCatalogueSection = section;
+  return getCatalogueSection;
+
 };
 export const printFilms = (json) => {
   const filmsContainer = document.createElement('section');
   filmsContainer.classList.add('films-container');
   filmsContainer.innerHTML += `
-    <section class="carousel-inner" data-id="${json.imdbID}" class="movie-box">
+    <section class="carousel-inner" data-id="${json.imdbID}">
       <p class="title">${json.Title}</p>
-        <img class="image" src="${json.Poster}">
-        <button id="info-${json.imdbID}" class="info">info</button>
+      <img class="image" class="d-block w-100" src="${json.Poster}">
+      <button id="info-${json.imdbID}" class="info">
+        <span class="material-icons">info</span>
+      </button>
     </section>
-
-    <section id="info-details${json.imdbID}" class="showing">
-
-    <section class"buttons-details">
-    <button class="like" id="like-${json.imdbID}">
-      <span class="material-icons">thumb_up_alt</span>
-    </button>
-
-    <button class="dislike" id="dislike-${json.imdbID}">
-      <span class="material-icons">thumb_down_alt</span>
-    </button>
-
-    <button class="save" id="save-${json.imdbID}">
-      <span class="material-icons">bookmark</span>
-    </button>
-
-    <button id="close-container-${json.imdbID}">
-      <span class="material-icons">close</span>
-    </button>
-  </section>
-
-
-    <div class="poster-info"><img src="${json.Poster}"> 
-    <p><b>${json.Title}</b> <br><br><br>
-    IMDb Rating: ${json.imdbRating} <br><br>
-    Director: ${json.Director} <br><br>
-    Year: ${json.Year}</p>
-    </div>
-    
-      <div class="details"> 
-        <p> <b>Plot:</b>  ${json.Plot}</p> <br>
-        <p>Genre: ${json.Genre}</p> <br>
-        <p>Runtime: ${json.Runtime}</p> <br>
-        <p>Awards: ${json.Awards}</p>
-      </div>
-
-    </section>
-    `;
+  `;
 
   const allInfo = filmsContainer.querySelectorAll('.info');
   allInfo.forEach((button) => {
     button.addEventListener('click', (e) => {
-      showDetailsContainer(e);
+      showDetailsContainer(e, json);
     });
   });
+
   return filmsContainer;
 };
 
-function showDetailsContainer(e) {
-  const idFilmCard = e.target.parentNode;
-  const idNumber = idFilmCard.dataset.id
-  toggleDetailsContainer(idFilmCard, true);
+function showDetailsContainer(e, json) {
 
-  const likeButton = document.getElementById(`like-${idNumber}`);
+  const idFilmCard = e.target.parentNode.parentNode;
+  const idNumber = idFilmCard.dataset.id;
+  const getDetailsBox = document.getElementById('movies-details-info');
+  getDetailsBox.innerHTML = `
+  <section id="info-details" class="">
+      <figure class="poster-details">
+        <img class="image" class="d-block w-100" src="${json.Poster}">
+      </figure>  
+      <section class="sub-details-section">
+        <p class="title-movie-details">${json.Title}</p>
+        <p class="title-details">
+           Director: 
+           <p class="subtitle-1">${json.Director}</p>
+        </p>
+        <p class="title-details">
+          Year:  
+          <p class="subtitle-1">${json.Year}</p>
+        </p> 
+        <p class="title-details">
+          Imdb score:
+          <p class="subtitle-1">${json.imdbRating}</p>
+        </p>  
+
+      <section class="buttons-details">
+        <button class="like" id="like-${json.imdbID}">
+          <span class="material-icons">thumb_up_alt</span>
+        </button>
+
+        <button class="dislike" id="dislike-${json.imdbID}">
+          <span class="material-icons">thumb_down_alt</span>
+        </button>
+
+        <button class="save" id="save-${json.imdbID}">
+          <span class="material-icons">bookmark</span>
+        </button>
+
+        <button class="close-detail" id="close-container-${json.imdbID}">
+          <span class="material-icons ">close</span>
+        </button>
+      </section>
+      </section>  
+      <section class="plot-box">
+        <p class="title-movie-details">Plot:</p>
+        <p class="subtitle-1">
+          ${json.Plot}
+        </p>
+      </section>  
+  </section>
+  `
+  const likeButton = getDetailsBox.querySelector(`#like-${json.imdbID}`);
   likeButton.addEventListener('click', () => {
-    console.log("Pegou o click do like")
-  })
+    addFilm(json.imdbID, json.Title, json.Poster, 'likes');
+    alert('Seu like foi recebido');
+  });
 
-  const dislikeButton = document.getElementById(`dislike-${idNumber}`);
+  const dislikeButton = getDetailsBox.querySelector(`#dislike-${json.imdbID}`);
   dislikeButton.addEventListener('click', () => {
-    console.log("Pegou o click do dislike")
-  })
+    addFilm(json.imdbID, json.Title, json.Poster, 'dislikes');
+    alert('Seu dislike foi recebido');
+  });
 
-  const saveMovieButton = document.getElementById(`save-${idNumber}`);
+  const saveMovieButton = getDetailsBox.querySelector(`#save-${json.imdbID}`);
   saveMovieButton.addEventListener('click', () => {
-    console.log("Pegou o click de salvar")
-  })
+    addFilm(json.imdbID, json.Title, json.Poster, 'watchlist');
+    alert('Seu favorito foi recebido');
 
+  });
+  
   const closeDetailsButton = document.getElementById(`close-container-${idNumber}`);
   closeDetailsButton.addEventListener('click', () => {
-    toggleDetailsContainer(idFilmCard, false);
-  })
+    getDetailsBox.innerHTML = ""
+  });
 }
-
-function toggleDetailsContainer(card, show) {
-  const cardFilm = card;
-  const holderDetailsContainer = document.querySelector(`#info-details${cardFilm.dataset.id}`)
-  if (show) {
-    document.querySelector('.showing').classList.remove('display')
-    holderDetailsContainer.classList.add('display');
-  } else {
-    holderDetailsContainer.classList.remove('display');
-  }
-}
-
 
 export const filterGenre = () => {
- const filter = document.querySelector('#genre')
+  const filter = document.querySelector('#genre');
   filter.addEventListener('change', () => {
-    document.querySelector('#catalogue').innerHTML = " "
-     for (const i of films){
-       const chooseFilter = filter.value
-       if(chooseFilter == i.genre){
-         getFilms(i)
-        }
+    document.querySelector('#catalogue').innerHTML = ' ';
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i of films) {
+      const chooseFilter = filter.value;
+      if (chooseFilter === i.genre) {
+        getFilms(i);
       }
-    })
-}
+    }
+  });
+};
 
+export const filterCountry = () => {
+  const filter = document.querySelector('#country');
+  filter.addEventListener('change', () => {
+    document.querySelector('#catalogue').innerHTML = ' ';
+    const chooseFilter = filter.value;
+    for (const i of films) {
+      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.Country === chooseFilter) {
+            const getCatalogueSection = document.querySelector('#catalogue');
+            getCatalogueSection.appendChild(printFilms(json));
+            printFilms(json);
+          }
+        });
+    }
+  });
+};
+
+export const filterYear = () => {
+  const filter = document.querySelector('#Year');
+  filter.addEventListener('change', () => {
+    document.querySelector('#catalogue').innerHTML = ' ';
+    const yearArea = document.querySelector('#year-area');
+    yearArea.innerHTML = filter.value;
+    for (const i of films) {
+      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.Year === filter.value) {
+            const getCatalogueSection = document.querySelector('#catalogue');
+            getCatalogueSection.appendChild(printFilms(json));
+            printFilms(json);
+          }
+        });
+    }
+  });
+};
+
+export const filterRuntime = () => {
+  const filter = document.querySelector('#Runtime');
+  filter.addEventListener('change', () => {
+    document.querySelector('#catalogue').innerHTML = ' ';
+    const timeArea = document.querySelector('#time-area');
+    timeArea.innerHTML = `${filter.value} min`;
+    for (const i of films) {
+      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.Runtime === timeArea.innerText) {
+            const getCatalogueSection = document.querySelector('#catalogue');
+            getCatalogueSection.appendChild(printFilms(json));
+            printFilms(json);
+          }
+        });
+    }
+  });
+};
 
 export const filterImdb = () => {
-    const filter = document.querySelector('#imdbRating')
-     filter.addEventListener('change', () => {
-        document.querySelector('#catalogue').innerHTML = " "
-         const numberArea = document.querySelector('#value-area')
-          numberArea.innerHTML = filter.value
-          
-          for(const i of films){
-
-            fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
-              .then((response) => response.json())
-              .then((json) => {
-                console.log(filter.value)
-                  if(json.imdbRating == filter.value){
-                    const getCatalogueSection = document.querySelector('#catalogue');
-                    getCatalogueSection.appendChild(printFilms(json));
-              
-                    printFilms(json);
-                   }
-                })
-
+  const filter = document.querySelector('#imdbRating');
+  filter.addEventListener('change', () => {
+    document.querySelector('#catalogue').innerHTML = ' ';
+    const numberArea = document.querySelector('#value-area');
+    numberArea.innerHTML = filter.value;
+    for (const i of films) {
+      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.imdbRating === filter.value) {
+            const getCatalogueSection = document.querySelector('#catalogue');
+            getCatalogueSection.appendChild(printFilms(json));
+            printFilms(json);
           }
-
-     })
- }
-
+        });
+    }
+  });
+};
 
 const sortByMostRecent = async () => {
-  let dataMovie = []
-  for (let item of films) {
+  const dataMovie = [];
+  for (const item of films) {
     await fetch(`http://www.omdbapi.com/?t=${item.title}&apikey=ce12da02`)
       .then((response) => response.json())
       .then((json) => {
         dataMovie.push(json);
-      })
+      });
   }
-  
-  dataMovie.sort(function (a, b) {
+  dataMovie.sort((a, b) => {
     if (+a.Year < +b.Year) return 1;
     if (+a.Year > +b.Year) return -1;
     return 0;
-  })
-
-}
-sortByMostRecent(); 
+  });
+};
+sortByMostRecent();
 
 const sortByHighestScoreImdb = async () => {
-  let dataMovie = []
-  for (let item of films) {
+  const dataMovie = [];
+  for (const item of films) {
     await fetch(`http://www.omdbapi.com/?t=${item.title}&apikey=ce12da02`)
       .then((response) => response.json())
       .then((json) => {
         dataMovie.push(json);
-      })
+      });
   }
-  dataMovie.sort(function (a, b) {
+  dataMovie.sort((a, b) => {
     if (+a.imdbRating < +b.imdbRating) return 1;
     if (+a.imdbRating > +b.imdbRating) return -1;
     return 0;
-  })
-}
+  });
+};
+
 sortByHighestScoreImdb();
 
+/*
+function imdbFilms(i) {
+  fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+    .then((response) => response.json())
+    .then((json) => {
+      if (json.imdbRating > 7.5) {
+        document.querySelector('.films-container').innerHTML += `
+          <section data-id="${json.imdbID}" class="movie-box">
+            <p class="title">${json.Title}</p>
+            <img class="image" src="${json.Poster}">
+            <button id="info-${json.imdbID}" class="info">info</button>
+          </section>
+        <section id="info-details${json.imdbID}"></section>`;
+      }
+*/
 
-        
-  

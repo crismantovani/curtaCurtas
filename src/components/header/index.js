@@ -1,11 +1,14 @@
+
 import {
   films
 } from '../../pages/home/mock.js'
 import { printFilms} from '../../pages/home/index.js'
 
+
 export const header = () => {
   const topHeader = document.createElement('header');
   topHeader.classList.add('header-container');
+  let userName = firebase.auth().currentUser.displayName;
 
   topHeader.innerHTML = `
     <div class="header-body">
@@ -14,7 +17,7 @@ export const header = () => {
       <span class="material-icons icon-search">
         search
       </span>
-      <p class="header-user">Hi,Galera</p>
+      <p class="header-user">Hi, ${userName}!</p>
       <span class="material-icons icon-heart">
         favorite_border
       </span>
@@ -25,29 +28,27 @@ export const header = () => {
 
   topHeader.querySelector('#search')
     .addEventListener('keyup', () => {
-      const nameSearch = "";
+      const nameSearch = '';
       const searchValue = topHeader.querySelector('#search').value;
-      searchForName(films, searchValue)
+      searchForName(films, searchValue);
     });
 
   function searchForName(data, condicao) {
-    const dataTest = data.filter(search => search.title.toUpperCase().includes(condicao.toUpperCase()));
-    getMoviesFilter(dataTest)
+    const dataTest = data.filter((search) => search.title.toUpperCase()
+      .includes(condicao.toUpperCase()));
+    getMoviesFilter(dataTest);
+  }
 
-  };
   const getMoviesFilter = (data) => {
-    // eslint-disable-next-line no-restricted-syntax
     const getCatalogueSection = document.querySelector('#catalogue');
     for (const i of data) {
-
       fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
         .then((response) => response.json())
         .then((json) => {
-          getCatalogueSection.innerHTML= ''
+          getCatalogueSection.innerHTML = '';
           getCatalogueSection.appendChild((printFilms(json)));
         });
-    };
-
+    }
   };
 
   const btnLogin = topHeader.querySelector('.btn-login');
@@ -55,7 +56,7 @@ export const header = () => {
   const greetingUser = topHeader.querySelector('.header-user');
   const iconHeart = topHeader.querySelector('.icon-heart');
 
-  let path = window.location.pathname;
+  const path = window.location.pathname;
   if (path === '/home') {
     btnLogin.classList.add('hidden');
     btnRegister.classList.add('hidden');
@@ -65,6 +66,5 @@ export const header = () => {
     greetingUser.classList.add('hidden');
     iconHeart.classList.add('hidden');
   }
-
   return topHeader;
 };
