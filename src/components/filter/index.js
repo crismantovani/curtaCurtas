@@ -1,3 +1,6 @@
+import { films } from '../../pages/home/mock.js'
+import { printFilms } from '../../pages/home/index.js'
+
 export const createMenuFilter = () => {
   const filterContent = document.createElement('section');
   filterContent.classList.add('conteudo-section');
@@ -70,6 +73,49 @@ export const createMenuFilter = () => {
       <button class="clear" type="button" id="btn-clear" value="Clear">Clear</button>
       <button class="filter-btn" type="button" id="btn-filter" value="Filter">Filter</button>
     `;
+
+  const filterByCountry = filterContent.querySelector('#country');
+  filterByCountry.addEventListener('change', () => {
+    document.querySelector('#catalogue').innerHTML = ' ';
+    const chooseFilter = filterByCountry.value;
+    filterData("Country", chooseFilter);
+  });
+
+  const filterByYear = filterContent.querySelector('#Year');
+  filterByYear.addEventListener('change', () => {
+    document.querySelector('#catalogue').innerHTML = ' ';
+    filterData("Year", filterByYear.value)
+  });
+
+    const filterByRunTime = filterContent.querySelector('#Runtime');
+    filterByRunTime.addEventListener('change', () => {
+      document.querySelector('#catalogue').innerHTML = ' ';
+      const timeArea = document.querySelector('#time-area');
+      timeArea.innerHTML = `${filterByRunTime.value} min`;
+      const getCondition = `${filterByRunTime.value} min`;
+      filterData("Runtime", getCondition)
+    });
+
+  const filterByImdb = filterContent.querySelector('#imdbRating');
+  filterByImdb.addEventListener('change', () => {
+    document.querySelector('#catalogue').innerHTML = ' ';
+    filterData("imdbRating", filterByImdb.value)
+  });
+
+  const filterData = (type, condition) => {
+    const getCatalogueSection = document.querySelector('#catalogue');
+    for (const i of films) {
+      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json[type] === condition) {
+            getCatalogueSection.innerHTML = '';
+            getCatalogueSection.appendChild(printFilms(json));
+            printFilms(json);
+          }
+        });
+    }
+  };
 
   return filterContent;
 };

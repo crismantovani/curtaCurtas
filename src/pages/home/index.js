@@ -161,12 +161,13 @@ function showDetailsContainer(e, json) {
     alert('Seu favorito foi recebido');
 
   });
-  
+
   const closeDetailsButton = document.getElementById(`close-container-${idNumber}`);
   closeDetailsButton.addEventListener('click', () => {
     getDetailsBox.innerHTML = ""
   });
 }
+
 
 export const filterGenre = () => {
   const filter = document.querySelector('#genre');
@@ -178,85 +179,6 @@ export const filterGenre = () => {
       if (chooseFilter === i.genre) {
         getFilms(i);
       }
-    }
-  });
-};
-
-export const filterCountry = () => {
-  const filter = document.querySelector('#country');
-  filter.addEventListener('change', () => {
-    document.querySelector('#catalogue').innerHTML = ' ';
-    const chooseFilter = filter.value;
-    for (const i of films) {
-      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.Country === chooseFilter) {
-            const getCatalogueSection = document.querySelector('#catalogue');
-            getCatalogueSection.appendChild(printFilms(json));
-            printFilms(json);
-          }
-        });
-    }
-  });
-};
-
-export const filterYear = () => {
-  const filter = document.querySelector('#Year');
-  filter.addEventListener('change', () => {
-    document.querySelector('#catalogue').innerHTML = ' ';
-    const yearArea = document.querySelector('#year-area');
-    yearArea.innerHTML = filter.value;
-    for (const i of films) {
-      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.Year === filter.value) {
-            const getCatalogueSection = document.querySelector('#catalogue');
-            getCatalogueSection.appendChild(printFilms(json));
-            printFilms(json);
-          }
-        });
-    }
-  });
-};
-
-export const filterRuntime = () => {
-  const filter = document.querySelector('#Runtime');
-  filter.addEventListener('change', () => {
-    document.querySelector('#catalogue').innerHTML = ' ';
-    const timeArea = document.querySelector('#time-area');
-    timeArea.innerHTML = `${filter.value} min`;
-    for (const i of films) {
-      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.Runtime === timeArea.innerText) {
-            const getCatalogueSection = document.querySelector('#catalogue');
-            getCatalogueSection.appendChild(printFilms(json));
-            printFilms(json);
-          }
-        });
-    }
-  });
-};
-
-export const filterImdb = () => {
-  const filter = document.querySelector('#imdbRating');
-  filter.addEventListener('change', () => {
-    document.querySelector('#catalogue').innerHTML = ' ';
-    const numberArea = document.querySelector('#value-area');
-    numberArea.innerHTML = filter.value;
-    for (const i of films) {
-      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.imdbRating === filter.value) {
-            const getCatalogueSection = document.querySelector('#catalogue');
-            getCatalogueSection.appendChild(printFilms(json));
-            printFilms(json);
-          }
-        });
     }
   });
 };

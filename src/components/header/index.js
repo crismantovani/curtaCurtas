@@ -38,7 +38,7 @@ export const header = () => {
     getMoviesFilter(dataTest);
   }
 
-  const getMoviesFilter = (data) => {
+const getMoviesFilter = (data) => {
     const getCatalogueSection = document.querySelector('#catalogue');
     for (const i of data) {
       fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
