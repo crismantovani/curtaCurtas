@@ -8,7 +8,7 @@ import { createMenuFilter } from '../../components/filter/index.js';
 import { addFilm } from '../../services/index.js';
 
 const getFilms = (i) => {
-  fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+  fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
     .then((response) => response.json())
     .then((json) => {
       const getCatalogueSection = document.querySelector('#catalogue');
@@ -188,7 +188,7 @@ export const filterCountry = () => {
     document.querySelector('#catalogue').innerHTML = ' ';
     const chooseFilter = filter.value;
     for (const i of films) {
-      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
         .then((response) => response.json())
         .then((json) => {
           if (json.Country === chooseFilter) {
@@ -208,7 +208,7 @@ export const filterYear = () => {
     const yearArea = document.querySelector('#year-area');
     yearArea.innerHTML = filter.value;
     for (const i of films) {
-      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
         .then((response) => response.json())
         .then((json) => {
           if (json.Year === filter.value) {
@@ -228,7 +228,7 @@ export const filterRuntime = () => {
     const timeArea = document.querySelector('#time-area');
     timeArea.innerHTML = `${filter.value} min`;
     for (const i of films) {
-      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
         .then((response) => response.json())
         .then((json) => {
           if (json.Runtime === timeArea.innerText) {
@@ -248,7 +248,7 @@ export const filterImdb = () => {
     const numberArea = document.querySelector('#value-area');
     numberArea.innerHTML = filter.value;
     for (const i of films) {
-      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
         .then((response) => response.json())
         .then((json) => {
           if (json.imdbRating === filter.value) {
@@ -264,7 +264,7 @@ export const filterImdb = () => {
 const sortByMostRecent = async () => {
   const dataMovie = [];
   for (const item of films) {
-    await fetch(`http://www.omdbapi.com/?t=${item.title}&apikey=ce12da02`)
+    await fetch(`https://www.omdbapi.com/?t=${item.title}&apikey=ce12da02`)
       .then((response) => response.json())
       .then((json) => {
         dataMovie.push(json);
@@ -281,7 +281,7 @@ sortByMostRecent();
 const sortByHighestScoreImdb = async () => {
   const dataMovie = [];
   for (const item of films) {
-    await fetch(`http://www.omdbapi.com/?t=${item.title}&apikey=ce12da02`)
+    await fetch(`https://www.omdbapi.com/?t=${item.title}&apikey=ce12da02`)
       .then((response) => response.json())
       .then((json) => {
         dataMovie.push(json);
