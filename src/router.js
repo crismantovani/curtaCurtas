@@ -19,9 +19,7 @@ const routes = {
 
 const renderRoute = () => {
   auth.onAuthStateChanged((user) => {
-    console.log(user);
     let path = window.location.pathname;
-    console.log(path);
     if (!user && path !== '/register') {
       path = '/';
       window.history.replaceState(null, null, path);

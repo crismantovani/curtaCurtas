@@ -40,7 +40,7 @@ export const header = () => {
   const getMoviesFilter = (data) => {
     const getCatalogueSection = document.querySelector('#catalogue');
     for (const i of data) {
-      fetch(`http://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
+      fetch(`https://www.omdbapi.com/?t=${i.title}&apikey=ce12da02`)
         .then((response) => response.json())
         .then((json) => {
           getCatalogueSection.innerHTML = '';
