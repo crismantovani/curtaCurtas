@@ -7,11 +7,11 @@ Uma aplicação Web para te ajudar a achar os melhores curtas. Para acessar [cli
 ## Índice
 - [1. Desafio](#1-desafio)
 - [2. Introdução](#2-introdução)
-- [3. Processo](#3.processo)
-- [4. Produto](#4.produto)
-- [5. Ferramentas](#5.ferramentas)
-- [6. Créditos](#6.créditos)
-- [7. Autoras](#7.autoras)
+- [3. Processo](#3-processo)
+- [4. Produto](#4-produto)
+- [5. Ferramentas](#5-ferramentas)
+- [6. Créditos](#6-créditos)
+- [7. Autoras](#7-desenvolvedoras)
 
 ---
 
