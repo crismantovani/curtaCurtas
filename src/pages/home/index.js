@@ -143,19 +143,19 @@ function showDetailsContainer(e, json) {
       </section>  
   </section>
   `
-  const likeButton = filmsContainer.querySelector(`#like-${json.imdbID}`);
+  const likeButton = getDetailsBox.querySelector(`#like-${json.imdbID}`);
   likeButton.addEventListener('click', () => {
     addFilm(json.imdbID, json.Title, json.Poster, 'likes');
     alert('Seu like foi recebido');
   });
 
-  const dislikeButton = filmsContainer.querySelector(`#dislike-${json.imdbID}`);
+  const dislikeButton = getDetailsBox.querySelector(`#dislike-${json.imdbID}`);
   dislikeButton.addEventListener('click', () => {
     addFilm(json.imdbID, json.Title, json.Poster, 'dislikes');
     alert('Seu dislike foi recebido');
   });
 
-  const saveMovieButton = filmsContainer.querySelector(`#save-${json.imdbID}`);
+  const saveMovieButton = getDetailsBox.querySelector(`#save-${json.imdbID}`);
   saveMovieButton.addEventListener('click', () => {
     addFilm(json.imdbID, json.Title, json.Poster, 'watchlist');
     alert('Seu favorito foi recebido');
