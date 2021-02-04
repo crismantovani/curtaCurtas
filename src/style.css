@@ -295,8 +295,7 @@ button {
 #filters-area {
     background-color: #D9D2B0;
     display: flex;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 50px 5% 0px;
     justify-content: center;
     align-items: center;
 }
@@ -394,6 +393,22 @@ input[type=range] {
     background-color: #F2D57E;
     outline: none;
 }
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    background: #dfbc53;
+    cursor: pointer;
+    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
+  }
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+input[type=range]:focus {
+    outline: none;
+  }
 #btn-filter:hover{
     margin: 10px;
     flex-direction: row;
