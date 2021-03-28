@@ -6,6 +6,16 @@
 
 Uma aplicação Web para te ajudar a achar os melhores curtas. Para acessar [clique aqui!](https://curta-curtas.web.app/) :clapper: 🎬 
 
+<div align='center'>
+
+
+|          🆔 Usuário        	|         :key: Senha          |
+|:---------------------------:|:-----------------------------:|
+| curta@curtacurtas.com.br    |           123456          	   |
+
+
+</div>
+
 ## Índice
 - [1. Desafio](#1-desafio)
 - [2. Introdução](#2-introdução)
