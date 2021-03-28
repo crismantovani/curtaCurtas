@@ -1,4 +1,6 @@
-<img align='center' src = "./src/img/logo.cc.branco.png" height='250' widht='250' ></img>
+<div align="center">
+ <img src = "./src/img/logo.cc.branco.png" height='250' widht='250' ></img>
+</div>
 
 ---
 
